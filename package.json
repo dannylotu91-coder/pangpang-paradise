@@ -11,7 +11,13 @@
     "express": "^4.18.2",
     "cors": "^2.8.5"
   },
-  "keywords": ["resort", "nature", "booking", "admin"],
+  "keywords": [
+    "resort",
+    "nature",
+    "booking",
+    "admin",
+    "papua-new-guinea"
+  ],
   "author": "Pangpang Paradise",
   "license": "MIT"
 }

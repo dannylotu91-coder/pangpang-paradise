@@ -75,6 +75,59 @@ let data = {
     }
 };
 
+// ======== NEW ROUTES FOR FRONTEND ========
+
+// Site content endpoint for frontend
+app.get('/api/site-content', (req, res) => {
+    res.json({
+        success: true,
+        data: {
+            featuredRooms: data.rooms.filter(room => room.featured),
+            featureFlags: data.featureFlags,
+            promotions: data.promotions.filter(promo => promo.active),
+            announcements: data.announcements,
+            weather: data.weather
+        }
+    });
+});
+
+// Booking endpoint
+app.post('/api/bookings', (req, res) => {
+    const bookingData = req.body;
+    
+    // Simulate booking processing
+    const bookingId = 'BK' + Date.now();
+    const totalAmount = calculateBookingAmount(bookingData);
+    
+    res.json({
+        success: true,
+        message: 'Booking request received successfully!',
+        bookingId: bookingId,
+        data: {
+            totalAmount: totalAmount,
+            bookingDetails: bookingData
+        }
+    });
+});
+
+// Helper function for booking calculation
+function calculateBookingAmount(bookingData) {
+    const roomPrices = {
+        1: 1050,
+        2: 700, 
+        3: 525
+    };
+    
+    const checkIn = new Date(bookingData.checkIn);
+    const checkOut = new Date(bookingData.checkOut);
+    const nights = Math.ceil((checkOut - checkIn) / (1000 * 60 * 60 * 24));
+    
+    const roomPrice = roomPrices[bookingData.accommodationId] || 500;
+    return roomPrice * nights;
+}
+
+// ======== EXISTING ADMIN ROUTES ========
+
 // API Routes
 app.get('/api/admin/data', (req, res) => {
     res.json({ success: true, data });
@@ -179,15 +232,29 @@ app.put('/api/admin/weather', (req, res) => {
 app.post('/api/chat', (req, res) => {
     const newMessage = {
         id: Date.now(),
-        userName: req.body.name,
-        userEmail: req.body.email,
+        userName: req.body.userName || req.body.name,
+        userEmail: req.body.userEmail || req.body.email,
         message: req.body.message,
         timestamp: new Date().toISOString()
     };
     data.recentMessages.unshift(newMessage);
     // Keep only last 20 messages
     data.recentMessages = data.recentMessages.slice(0, 20);
-    res.json({ success: true, message: newMessage });
+    
+    // Auto-response simulation
+    const responses = [
+        "Thanks for your message! Our team will contact you soon.",
+        "We'll get back to you within 24 hours with more information!",
+        "Thank you for your interest in Pangpang Paradise!",
+        "Our nature guides are excited to help you plan your stay!"
+    ];
+    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+    
+    res.json({ 
+        success: true, 
+        message: newMessage,
+        response: randomResponse
+    });
 });
 
 // Admin route
