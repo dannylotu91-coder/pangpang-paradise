@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏝️ Pangpang Paradise Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2e8b57, #3cb371);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.3);
+        }
+
+        .header h1 {
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid #2e8b57;
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            color: #2e8b57;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2 i {
+            color: #2e8b57;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid #2e8b57;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2e8b57;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #2e8b57;
+        }
+
+        button {
+            background: #2e8b57;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0.25rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        button:hover {
+            background: #256f47;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(46, 139, 87, 0.3);
+        }
+
+        button.danger {
+            background: #dc3545;
+        }
+
+        button.danger:hover {
+            background: #c82333;
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        button.secondary:hover {
+            background: #5a6268;
+        }
+
+        button.small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2e8b57;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .toggle-label {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .message-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 2px solid #e9ecef;
+            padding: 1rem;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .message {
+            padding: 1rem;
+            border-bottom: 1px solid #dee2e6;
+            background: white;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #2e8b57;
+        }
+
+        .message:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .message strong {
+            color: #2e8b57;
+        }
+
+        .message small {
+            color: #6c757d;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid #dc3545;
+            display: none;
+        }
+
+        .room-list, .promo-list {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .room-item, .promo-item {
+            padding: 1.5rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .room-item h4, .promo-item h4 {
+            color: #2e8b57;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-actions, .promo-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .image-gallery {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .image-item {
+            position: relative;
+            display: inline-block;
+        }
+
+        .image-item img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #e9ecef;
+        }
+
+        .image-item button {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-content h3 {
+            margin-bottom: 1.5rem;
+            color: #2e8b57;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .form-buttons button {
+            flex: 1;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6c757d;
+        }
+
+        .loading i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #2e8b57;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .stats {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .room-actions, .promo-actions {
+                flex-direction: column;
+            }
+            
+            button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-cogs"></i> Pangpang Paradise Admin Dashboard</h1>
+        <p>Manage your nature resort website in real-time</p>
+    </div>
+
+    <div class="stats" id="statsContainer">
+        <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading statistics...</p>
+        </div>
+    </div>
+
+    <!-- Feature Flags Section -->
+    <div class="section">
+        <h2><i class="fas fa-toggle-on"></i> Feature Flags</h2>
+        <div id="featureFlagsContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading features...</p>
+            </div>
+        </div>
+        <button onclick="updateFeatureFlags()">
+            <i class="fas fa-save"></i> Save Feature Flags
+        </button>
+    </div>
+
+    <!-- Room Management Section -->
+    <div class="section">
+        <h2><i class="fas fa-home"></i> Manage Accommodations</h2>
+        <div id="roomsContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading accommodations...</p>
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: #2e8b57;"><i class="fas fa-plus"></i> Add New Accommodation</h3>
+        <div class="form-group">
+            <input type="text" id="newRoomName" placeholder="Room Name (e.g., Rainforest Treehouse)">
+        </div>
+        <div class="form-group">
+            <input type="number" id="newRoomPrice" placeholder="Price in PGK">
+        </div>
+        <div class="form-group">
+            <textarea id="newRoomDesc" rows="2" placeholder="Room description"></textarea>
+        </div>
+        <div class="form-group">
+            <select id="newRoomType">
+                <option value="villa">Nature Villa</option>
+                <option value="suite">Beach Suite</option>
+                <option value="bungalow">Garden Bungalow</option>
+                <option value="hut">Traditional Hut</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" id="newRoomAmenities" placeholder="Amenities (comma separated)">
+        </div>
+        <button onclick="addNewRoom()">
+            <i class="fas fa-plus"></i> Add New Room
+        </button>
+    </div>
+
+    <!-- Promotion Management Section -->
+    <div class="section">
+        <h2><i class="fas fa-tag"></i> Manage Promotions</h2>
+        <div id="promotionsContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading promotions...</p>
+            </div>
+        </div>
+        
+        <h3 style="margin-top: 2rem; color: #2e8b57;"><i class="fas fa-plus"></i> Add New Promotion</h3>
+        <div class="form-group">
+            <input type="text" id="newPromoTitle" placeholder="Promotion Title">
+        </div>
+        <div class="form-group">
+            <input type="text" id="newPromoDesc" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <input type="text" id="newPromoDiscount" placeholder="Discount Text">
+        </div>
+        <div class="form-group">
+            <input type="date" id="newPromoDate" placeholder="Valid Until">
+        </div>
+        <button onclick="addNewPromo()">
+            <i class="fas fa-plus"></i> Add New Promotion
+        </button>
+    </div>
+
+    <!-- Announcements Section -->
+    <div class="section">
+        <h2><i class="fas fa-bullhorn"></i> Announcements</h2>
+        <div class="form-group">
+            <textarea id="announcements" rows="4" placeholder="Enter announcements (one per line)"></textarea>
+        </div>
+        <button onclick="updateAnnouncements()">
+            <i class="fas fa-save"></i> Update Announcements
+        </button>
+    </div>
+
+    <!-- Weather Section -->
+    <div class="section">
+        <h2><i class="fas fa-cloud-sun"></i> Weather Information</h2>
+        <div class="form-group">
+            <input type="number" id="weatherTemp" placeholder="Temperature">
+        </div>
+        <div class="form-group">
+            <input type="text" id="weatherCondition" placeholder="Condition">
+        </div>
+        <div class="form-group">
+            <input type="text" id="weatherForecast" placeholder="Forecast">
+        </div>
+        <button onclick="updateWeather()">
+            <i class="fas fa-save"></i> Update Weather
+        </button>
+    </div>
+
+    <!-- Chat Messages Section -->
+    <div class="section">
+        <h2><i class="fas fa-comments"></i> Recent Chat Messages</h2>
+        <div id="messagesContainer">
+            <div class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Loading messages...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Manager Modal -->
+    <div class="modal-overlay" id="imageManagerModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-images"></i> Manage Room Images</h3>
+            <div id="imageManagerContent">
+                <!-- Content loaded dynamically -->
+            </div>
+            <div class="form-buttons">
+                <button onclick="closeImageManager()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Room Modal -->
+    <div class="modal-overlay" id="editRoomModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-edit"></i> Edit Room Details</h3>
+            <div class="form-group">
+                <label>Room Name:</label>
+                <input type="text" id="editRoomName" placeholder="Room Name">
+            </div>
+            <div class="form-group">
+                <label>Price (PGK):</label>
+                <input type="number" id="editRoomPrice" placeholder="Price in PGK">
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea id="editRoomDesc" rows="3" placeholder="Room description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Type:</label>
+                <select id="editRoomType">
+                    <option value="villa">Nature Villa</option>
+                    <option value="suite">Beach Suite</option>
+                    <option value="bungalow">Garden Bungalow</option>
+                    <option value="hut">Traditional Hut</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Amenities (comma separated):</label>
+                <input type="text" id="editRoomAmenities" placeholder="Ocean View, Private Beach, Eco-Friendly">
+            </div>
+            <div class="form-buttons">
+                <button onclick="saveRoomDetails()">
+                    <i class="fas fa-save"></i> Save Changes
+                </button>
+                <button class="secondary" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i> Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="success" id="successMessage"></div>
+    <div class="error" id="errorMessage"></div>
+
+    <script>
+        const API_BASE = '/api/admin';
+        let currentImageRoomId = null;
+        let editingRoomId = null;
+        let adminData = null;
+
+        // Load admin data when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAdminData();
+        });
+
+        // Load all admin data
+        async function loadAdminData() {
+            try {
+                const response = await fetch(API_BASE + '/data');
+                const data = await response.json();
+                
+                if (data.success) {
+                    adminData = data.data;
+                    updateStats(data.data.stats);
+                    updateFeatureFlagsDisplay(data.data.featureFlags);
+                    updateRoomsDisplay(data.data.rooms);
+                    updatePromotionsDisplay(data.data.promotions);
+                    updateAnnouncementsDisplay(data.data.announcements);
+                    updateWeatherDisplay(data.data.weather);
+                    updateMessagesDisplay(data.data.recentMessages);
+                } else {
+                    showError('Failed to load admin data');
+                }
+            } catch (error) {
+                showError('Cannot connect to server. Make sure backend is running.');
+                console.error('Error:', error);
+            }
+        }
+
+        // Update statistics
+        function updateStats(stats) {
+            const container = document.getElementById('statsContainer');
+            container.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${stats.totalBookings}</div>
+                    <div class="stat-label">Total Bookings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.totalMessages}</div>
+                    <div class="stat-label">Chat Messages</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.activeRooms}</div>
+                    <div class="stat-label">Active Rooms</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${stats.activePromotions}</div>
+                    <div class="stat-label">Active Promotions</div>
+                </div>
+            `;
+        }
+
+        // Update feature flags display
+        function updateFeatureFlagsDisplay(flags) {
+            const container = document.getElementById('featureFlagsContainer');
+            container.innerHTML = Object.entries(flags).map(([key, value]) => `
+                <div class="toggle-container">
+                    <span class="toggle-label">${formatFeatureFlagName(key)}</span>
+                    <label class="switch">
+                        <input type="checkbox" id="flag-${key}" ${value ? 'checked' : ''}>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            `).join('');
+        }
+
+        // Update rooms display
+        function updateRoomsDisplay(rooms) {
+            const container = document.getElementById('roomsContainer');
+            container.innerHTML = rooms.map(room => `
+                <div class="room-item">
+                    <h4>${room.name}</h4>
+                    <p><strong>Price:</strong> ${room.price} PGK/night</p>
+                    <p><strong>Type:</strong> ${formatRoomType(room.type)}</p>
+                    <p><strong>Description:</strong> ${room.description}</p>
+                    <p><strong>Amenities:</strong> ${room.amenities.join(', ')}</p>
+                    
+                    <!-- Images Preview -->
+                    <div class="image-gallery">
+                        ${room.images && room.images.length > 0 ? 
+                            room.images.map((img, index) => `
+                                <div class="image-item">
+                                    <img src="${img}" alt="${room.name}" 
+                                         onerror="this.src='https://via.placeholder.com/80x60/2e8b57/white?text=Image'">
+                                    <button class="danger small" onclick="removeImage(${room.id}, ${index})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            `).join('') : 
+                            '<span style="color: #666;">No images</span>'
+                        }
+                    </div>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label">Featured on homepage</span>
+                        <label class="switch">
+                            <input type="checkbox" id="featured-${room.id}" ${room.featured ? 'checked' : ''}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label">Available for booking</span>
+                        <label class="switch">
+                            <input type="checkbox" id="available-${room.id}" ${room.available ? 'checked' : ''}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="room-actions">
+                        <button onclick="updateRoomStatus(${room.id})">
+                            <i class="fas fa-save"></i> Update Status
+                        </button>
+                        <button onclick="editRoomDetails(${room.id})" class="secondary">
+                            <i class="fas fa-edit"></i> Edit Details
+                        </button>
+                        <button onclick="openImageManager(${room.id})">
+                            <i class="fas fa-images"></i> Manage Images
+                        </button>
+                        <button class="danger" onclick="deleteRoom(${room.id})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update promotions display
+        function updatePromotionsDisplay(promotions) {
+            const container = document.getElementById('promotionsContainer');
+            container.innerHTML = promotions.map(promo => `
+                <div class="promo-item">
+                    <h4>${promo.title}</h4>
+                    <p>${promo.description}</p>
+                    <p><strong>Discount:</strong> ${promo.discount}</p>
+                    <p><strong>Valid Until:</strong> ${promo.validUntil}</p>
+                    
+                    <div class="toggle-container">
+                        <span class="toggle-label">Active Promotion</span>
+                        <label class="switch">
+                            <input type="checkbox" id="promo-${promo.id}" ${promo.active ? 'checked' : ''}>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    
+                    <div class="promo-actions">
+                        <button onclick="updatePromoStatus(${promo.id})" class="small">
+                            <i class="fas fa-save"></i> Update
+                        </button>
+                        <button class="danger small" onclick="deletePromo(${promo.id})">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update announcements display
+        function updateAnnouncementsDisplay(announcements) {
+            document.getElementById('announcements').value = announcements.join('\n');
+        }
+
+        // Update weather display
+        function updateWeatherDisplay(weather) {
+            document.getElementById('weatherTemp').value = weather.temperature || '';
+            document.getElementById('weatherCondition').value = weather.condition || '';
+            document.getElementById('weatherForecast').value = weather.forecast || '';
+        }
+
+        // Update messages display
+        function updateMessagesDisplay(messages) {
+            const container = document.getElementById('messagesContainer');
+            if (messages.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No messages yet</p>';
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="message-list">
+                    ${messages.map(msg => `
+                        <div class="message">
+                            <strong>${msg.userName}</strong> (${msg.userEmail})<br>
+                            ${msg.message}<br>
+                            <small>${new Date(msg.timestamp).toLocaleString()}</small>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Feature flag functions
+        async function updateFeatureFlags() {
+            const flags = {};
+            document.querySelectorAll('[id^="flag-"]').forEach(input => {
+                const key = input.id.replace('flag-', '');
+                flags[key] = input.checked;
+            });
+
+            try {
+                const response = await fetch(API_BASE + '/feature-flags', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(flags)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Feature flags updated successfully!');
+                }
+            } catch (error) {
+                showError('Failed to update feature flags');
+            }
+        }
+
+        // Room management functions
+        async function updateRoomStatus(roomId) {
+            const updates = {
+                featured: document.getElementById(`featured-${roomId}`).checked,
+                available: document.getElementById(`available-${roomId}`).checked
+            };
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${roomId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(updates)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Room status updated successfully!');
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to update room status');
+            }
+        }
+
+        async function addNewRoom() {
+            const roomData = {
+                name: document.getElementById('newRoomName').value,
+                price: parseInt(document.getElementById('newRoomPrice').value),
+                description: document.getElementById('newRoomDesc').value,
+                type: document.getElementById('newRoomType').value,
+                amenities: document.getElementById('newRoomAmenities').value.split(',').map(a => a.trim()).filter(a => a),
+                featured: true,
+                available: true
+            };
+
+            if (!roomData.name || !roomData.price) {
+                showError('Please fill in at least name and price');
+                return;
+            }
+
+            try {
+                const response = await fetch(API_BASE + '/rooms', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(roomData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('New room added successfully!');
+                    // Clear form
+                    document.getElementById('newRoomName').value = '';
+                    document.getElementById('newRoomPrice').value = '';
+                    document.getElementById('newRoomDesc').value = '';
+                    document.getElementById('newRoomAmenities').value = '';
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to add new room');
+            }
+        }
+
+        async function deleteRoom(roomId) {
+            const room = adminData.rooms.find(r => r.id === roomId);
+            if (!confirm(`Are you sure you want to delete "${room.name}"? This cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${roomId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Room deleted successfully!');
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to delete room');
+            }
+        }
+
+        // Edit room functions
+        function editRoomDetails(roomId) {
+            const room = adminData.rooms.find(r => r.id === roomId);
+            if (room) {
+                editingRoomId = roomId;
+                document.getElementById('editRoomName').value = room.name;
+                document.getElementById('editRoomPrice').value = room.price;
+                document.getElementById('editRoomDesc').value = room.description;
+                document.getElementById('editRoomType').value = room.type;
+                document.getElementById('editRoomAmenities').value = room.amenities.join(', ');
+                document.getElementById('editRoomModal').style.display = 'flex';
+            }
+        }
+
+        async function saveRoomDetails() {
+            const roomData = {
+                name: document.getElementById('editRoomName').value,
+                price: parseInt(document.getElementById('editRoomPrice').value),
+                description: document.getElementById('editRoomDesc').value,
+                type: document.getElementById('editRoomType').value,
+                amenities: document.getElementById('editRoomAmenities').value.split(',').map(a => a.trim()).filter(a => a)
+            };
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${editingRoomId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(roomData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Room details updated successfully!');
+                    closeEditModal();
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to update room details');
+            }
+        }
+
+        function closeEditModal() {
+            document.getElementById('editRoomModal').style.display = 'none';
+            editingRoomId = null;
+        }
+
+        // Image management functions
+        async function openImageManager(roomId) {
+            currentImageRoomId = roomId;
+            const room = adminData.rooms.find(r => r.id === roomId);
+            
+            document.getElementById('imageManagerContent').innerHTML = `
+                <h4>Managing images for: ${room.name}</h4>
+                
+                <div class="form-group">
+                    <label>Current Images:</label>
+                    <div class="image-gallery">
+                        ${room.images && room.images.length > 0 ? 
+                            room.images.map((img, index) => `
+                                <div class="image-item">
+                                    <img src="${img}" alt="Room image" 
+                                         onerror="this.src='https://via.placeholder.com/80x60/2e8b57/white?text=Image'">
+                                    <button class="danger small" onclick="removeImage(${roomId}, ${index})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            `).join('') : 
+                            '<p style="color: #666;">No images yet</p>'
+                        }
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Add Image URL:</label>
+                    <input type="text" id="imageUrlInput" placeholder="https://example.com/image.jpg">
+                    <button onclick="addImageByUrl(${roomId})" class="small" style="margin-top: 0.5rem;">
+                        <i class="fas fa-link"></i> Add URL
+                    </button>
+                </div>
+                
+                <div class="form-group">
+                    <label>Quick Add Sample Images:</label>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button onclick="addSampleImage(${roomId}, 'villa')" class="small">
+                            <i class="fas fa-home"></i> Villa
+                        </button>
+                        <button onclick="addSampleImage(${roomId}, 'beach')" class="small">
+                            <i class="fas fa-umbrella-beach"></i> Beach
+                        </button>
+                        <button onclick="addSampleImage(${roomId}, 'nature')" class="small">
+                            <i class="fas fa-tree"></i> Nature
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('imageManagerModal').style.display = 'flex';
+        }
+
+        function closeImageManager() {
+            document.getElementById('imageManagerModal').style.display = 'none';
+            currentImageRoomId = null;
+        }
+
+        async function removeImage(roomId, imageIndex) {
+            const room = adminData.rooms.find(r => r.id === roomId);
+            const currentImages = [...room.images];
+            currentImages.splice(imageIndex, 1);
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${roomId}/images`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ images: currentImages })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Image removed successfully!');
+                    loadAdminData(); // Refresh data
+                    if (currentImageRoomId === roomId) {
+                        openImageManager(roomId); // Refresh image manager
+                    }
+                }
+            } catch (error) {
+                showError('Failed to remove image');
+            }
+        }
+
+        async function addImageByUrl(roomId) {
+            const imageUrl = document.getElementById('imageUrlInput').value.trim();
+            if (!imageUrl) {
+                showError('Please enter an image URL');
+                return;
+            }
+
+            const room = adminData.rooms.find(r => r.id === roomId);
+            const currentImages = [...room.images, imageUrl];
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${roomId}/images`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ images: currentImages })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Image added successfully!');
+                    document.getElementById('imageUrlInput').value = '';
+                    loadAdminData(); // Refresh data
+                    openImageManager(roomId); // Refresh image manager
+                }
+            } catch (error) {
+                showError('Failed to add image');
+            }
+        }
+
+        async function addSampleImage(roomId, type) {
+            const sampleImages = {
+                villa: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=400&h=300&fit=crop',
+                beach: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=300&fit=crop',
+                nature: 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop'
+            };
+
+            const room = adminData.rooms.find(r => r.id === roomId);
+            const currentImages = [...room.images, sampleImages[type]];
+
+            try {
+                const response = await fetch(`/api/admin/rooms/${roomId}/images`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ images: currentImages })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Sample image added successfully!');
+                    loadAdminData(); // Refresh data
+                    openImageManager(roomId); // Refresh image manager
+                }
+            } catch (error) {
+                showError('Failed to add sample image');
+            }
+        }
+
+        // Promotion management functions
+        async function updatePromoStatus(promoId) {
+            const updates = {
+                active: document.getElementById(`promo-${promoId}`).checked
+            };
+
+            try {
+                const response = await fetch(`/api/admin/promotions/${promoId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(updates)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Promotion updated successfully!');
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to update promotion');
+            }
+        }
+
+        async function addNewPromo() {
+            const promoData = {
+                title: document.getElementById('newPromoTitle').value,
+                description: document.getElementById('newPromoDesc').value,
+                discount: document.getElementById('newPromoDiscount').value,
+                validUntil: document.getElementById('newPromoDate').value,
+                active: true
+            };
+
+            if (!promoData.title || !promoData.discount) {
+                showError('Please fill in at least title and discount');
+                return;
+            }
+
+            try {
+                const response = await fetch(API_BASE + '/promotions', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(promoData)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('New promotion added successfully!');
+                    // Clear form
+                    document.getElementById('newPromoTitle').value = '';
+                    document.getElementById('newPromoDesc').value = '';
+                    document.getElementById('newPromoDiscount').value = '';
+                    document.getElementById('newPromoDate').value = '';
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to add new promotion');
+            }
+        }
+
+        async function deletePromo(promoId) {
+            if (!confirm('Are you sure you want to delete this promotion?')) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/admin/promotions/${promoId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Promotion deleted successfully!');
+                    loadAdminData(); // Refresh data
+                }
+            } catch (error) {
+                showError('Failed to delete promotion');
+            }
+        }
+
+        // Announcements function
+        async function updateAnnouncements() {
+            const announcements = document.getElementById('announcements').value.split('\n').filter(a => a.trim());
+
+            try {
+                const response = await fetch(API_BASE + '/announcements', {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ announcements })
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Announcements updated successfully!');
+                }
+            } catch (error) {
+                showError('Failed to update announcements');
+            }
+        }
+
+        // Weather function
+        async function updateWeather() {
+            const weather = {
+                temperature: parseInt(document.getElementById('weatherTemp').value),
+                condition: document.getElementById('weatherCondition').value,
+                forecast: document.getElementById('weatherForecast').value
+            };
+
+            try {
+                const response = await fetch(API_BASE + '/weather', {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(weather)
+                });
+
+                const data = await response.json();
+                if (data.success) {
+                    showSuccess('Weather information updated successfully!');
+                }
+            } catch (error) {
+                showError('Failed to update weather information');
+            }
+        }
+
+        // Utility functions
+        function formatFeatureFlagName(key) {
+            return key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+        }
+
+        function formatRoomType(type) {
+            const types = {
+                villa: 'Nature Villa',
+                suite: 'Beach Suite',
+                bungalow: 'Garden Bungalow',
+                hut: 'Traditional Hut'
+            };
+            return types[type] || type;
+        }
+
+        function showSuccess(message) {
+            const element = document.getElementById('successMessage');
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => element.style.display = 'none', 3000);
+        }
+
+        function showError(message) {
+            const element = document.getElementById('errorMessage');
+            element.textContent = message;
+            element.style.display = 'block';
+            setTimeout(() => element.style.display = 'none', 5000);
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+                if (event.target.id === 'imageManagerModal') {
+                    currentImageRoomId = null;
+                }
+                if (event.target.id === 'editRoomModal') {
+                    editingRoomId = null;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

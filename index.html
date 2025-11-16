@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pangpang Paradise Island - Papua New Guinea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2e8b57;
+        }
+
+        .logo i {
+            color: #ff6b6b;
+            margin-right: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2e8b57;
+        }
+
+        .book-now {
+            background: #2e8b57;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+            margin-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #2e8b57;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #2e8b57;
+            margin-bottom: 1rem;
+        }
+
+        /* Rooms Section */
+        .rooms {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+
+        .rooms-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .room-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 1rem 0;
+        }
+
+        .currency {
+            font-size: 0.8em;
+            color: #ffd700;
+            font-weight: normal;
+        }
+
+        /* Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2e8b57;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(46,139,87,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .chat-widget:hover {
+            transform: scale(1.1);
+        }
+
+        /* Quick Book */
+        .quick-book {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: #2e8b57;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(46,139,87,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .quick-book:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .quick-book, .chat-widget {
+                bottom: 1rem;
+            }
+            
+            .quick-book {
+                left: 1rem;
+            }
+            
+            .chat-widget {
+                right: 1rem;
+            }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .form-buttons button {
+            flex: 1;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="nav-container">
+            <div class="logo">
+                <i class="fas fa-umbrella-beach"></i>
+                Pangpang Paradise
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#rooms">Nature Stays</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="book-now" onclick="showBookingModal()">Book Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to Pangpang Paradise</h1>
+            <p>Experience authentic nature, adventure, and Papua New Guinea culture</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="showBookingModal()">
+                    <i class="fas fa-calendar-check"></i> Book Your Stay
+                </button>
+                <button class="btn btn-secondary" onclick="scrollToSection('features')">
+                    <i class="fas fa-compass"></i> Explore More
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Choose Pangpang Paradise?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3>Easy Booking</h3>
+                <p>Simple, fast booking with instant confirmation</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3>Natural Location</h3>
+                <p>Pristine beachfront surrounded by untouched nature</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Eco-Friendly</h3>
+                <p>Sustainable stays that respect our natural environment</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-snorkeling"></i>
+                </div>
+                <h3>Local Experiences</h3>
+                <p>Authentic PNG cultural tours and nature adventures</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section class="rooms" id="rooms">
+        <h2 class="section-title">Natural Accommodations</h2>
+        <div class="rooms-grid" id="roomsContainer">
+            <!-- Rooms will be loaded dynamically from backend -->
+        </div>
+    </section>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" onclick="showChatModal()">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Quick Book Button -->
+    <a href="#" class="quick-book" onclick="showBookingModal()">
+        <i class="fas fa-bolt"></i> Quick Book
+    </a>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <h2>🏝️ Book Your Nature Stay</h2>
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Select Accommodation:</label>
+                    <select id="accommodationSelect" required>
+                        <option value="">Choose your nature stay...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Check-in Date:</label>
+                    <input type="date" id="checkIn" required>
+                </div>
+                <div class="form-group">
+                    <label>Check-out Date:</label>
+                    <input type="date" id="checkOut" required>
+                </div>
+                <div class="form-group">
+                    <label>Number of Guests:</label>
+                    <input type="number" id="guests" min="1" max="8" value="2" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Name:</label>
+                    <input type="text" id="userName" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address:</label>
+                    <input type="email" id="userEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label>Special Requests:</label>
+                    <textarea id="specialRequests" rows="3" placeholder="Any special requirements?"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('bookingModal')">Cancel</button>
+                </div>
+            </form>
+            <div class="success-message" id="bookingSuccess"></div>
+        </div>
+    </div>
+
+    <!-- Chat Modal -->
+    <div class="modal-overlay" id="chatModal">
+        <div class="modal-content">
+            <h2>💬 Nature Guide Chat</h2>
+            <div class="form-group">
+                <label>Your Name:</label>
+                <input type="text" id="chatName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Your Email:</label>
+                <input type="email" id="chatEmail" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label>Your Question:</label>
+                <textarea id="chatMessage" rows="4" placeholder="Ask about prices, activities, weather, or anything else!"></textarea>
+            </div>
+            <div class="form-buttons">
+                <button class="btn btn-primary" onclick="sendChatMessage()">Send Message</button>
+                <button class="btn btn-secondary" onclick="closeModal('chatModal')">Cancel</button>
+            </div>
+            <div class="success-message" id="chatSuccess"></div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        const API_BASE = '/api';
+
+        // Load dynamic content when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSiteContent();
+            setupEventListeners();
+        });
+
+        // Load content from backend
+        async function loadSiteContent() {
+            try {
+                const response = await fetch(API_BASE + '/site-content');
+                const data = await response.json();
+                
+                if (data.success) {
+                    updateRooms(data.data.featuredRooms);
+                    updateFeatureFlags(data.data.featureFlags);
+                }
+            } catch (error) {
+                console.log('Using default content');
+                loadDefaultRooms();
+            }
+        }
+
+        // Update rooms display
+        function updateRooms(rooms) {
+            const container = document.getElementById('roomsContainer');
+            if (!container) return;
+
+            container.innerHTML = rooms.map(room => `
+                <div class="room-card">
+                    ${room.images && room.images.length > 0 ? 
+                        `<img src="${room.images[0]}" alt="${room.name}" class="room-image">` : 
+                        '<div class="room-image" style="background: #2e8b57; display: flex; align-items: center; justify-content: center; color: white;">Image Coming Soon</div>'
+                    }
+                    <h3>${room.name}</h3>
+                    <p>${room.description}</p>
+                    <div class="room-price">${room.price} <span class="currency">PGK</span>/night</div>
+                    <p><strong>Amenities:</strong> ${room.amenities.join(', ')}</p>
+                    <button class="btn btn-primary" onclick="showBookingModal(${room.id})">Book Now</button>
+                </div>
+            `).join('');
+        }
+
+        // Load default rooms if API fails
+        function loadDefaultRooms() {
+            const defaultRooms = [
+                {
+                    id: 1,
+                    name: "Ocean View Nature Villa",
+                    description: "Eco-friendly villa with stunning ocean views",
+                    price: 1050,
+                    amenities: ["Private Beach", "Ocean View", "Eco-Friendly"],
+                    images: []
+                },
+                {
+                    id: 2,
+                    name: "Beachfront Natural Suite", 
+                    description: "Comfortable suite steps from the beach",
+                    price: 700,
+                    amenities: ["Beach Front", "Balcony", "Queen Bed"],
+                    images: []
+                },
+                {
+                    id: 3,
+                    name: "Garden Bungalow",
+                    description: "Traditional bungalow in tropical gardens", 
+                    price: 525,
+                    amenities: ["Garden View", "Traditional Design", "Double Bed"],
+                    images: []
+                }
+            ];
+            updateRooms(defaultRooms);
+        }
+
+        // Update feature flags
+        function updateFeatureFlags(flags) {
+            if (!flags.enableChat) {
+                document.querySelector('.chat-widget').style.display = 'none';
+            }
+            if (!flags.enableBooking) {
+                document.querySelector('.book-now').style.display = 'none';
+                document.querySelector('.quick-book').style.display = 'none';
+            }
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Booking form submission
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                submitBooking();
+            });
+
+            // Set minimum dates for booking
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('checkIn').min = today;
+            document.getElementById('checkOut').min = today;
+        }
+
+        // Show booking modal
+        function showBookingModal(roomId = null) {
+            const modal = document.getElementById('bookingModal');
+            const select = document.getElementById('accommodationSelect');
+            
+            // Populate room options
+            select.innerHTML = '<option value="">Choose your nature stay...</option>';
+            
+            // This would be populated from API in real implementation
+            const roomOptions = [
+                { id: 1, name: "Ocean View Nature Villa - 1,050 PGK/night" },
+                { id: 2, name: "Beachfront Natural Suite - 700 PGK/night" },
+                { id: 3, name: "Garden Bungalow - 525 PGK/night" }
+            ];
+            
+            roomOptions.forEach(room => {
+                const option = document.createElement('option');
+                option.value = room.id;
+                option.textContent = room.name;
+                if (roomId && room.id === roomId) {
+                    option.selected = true;
+                }
+                select.appendChild(option);
+            });
+            
+            modal.style.display = 'flex';
+        }
+
+        // Show chat modal
+        function showChatModal() {
+            document.getElementById('chatModal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Submit booking
+        async function submitBooking() {
+            const formData = {
+                accommodationId: parseInt(document.getElementById('accommodationSelect').value),
+                checkIn: document.getElementById('checkIn').value,
+                checkOut: document.getElementById('checkOut').value,
+                guests: parseInt(document.getElementById('guests').value),
+                userInfo: {
+                    name: document.getElementById('userName').value,
+                    email: document.getElementById('userEmail').value
+                },
+                specialRequests: document.getElementById('specialRequests').value
+            };
+
+            try {
+                const response = await fetch(API_BASE + '/bookings', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('bookingSuccess').textContent = 
+                        `✅ ${data.message}\nBooking ID: ${data.bookingId}\nTotal: ${data.data.totalAmount} PGK`;
+                    document.getElementById('bookingSuccess').style.display = 'block';
+                    document.getElementById('bookingForm').reset();
+                    
+                    setTimeout(() => {
+                        closeModal('bookingModal');
+                        document.getElementById('bookingSuccess').style.display = 'none';
+                    }, 3000);
+                } else {
+                    alert('Booking failed: ' + data.message);
+                }
+            } catch (error) {
+                alert('🎉 Booking simulation successful!\nIn real implementation, this would connect to our booking system.');
+                closeModal('bookingModal');
+            }
+        }
+
+        // Send chat message
+        async function sendChatMessage() {
+            const name = document.getElementById('chatName').value;
+            const email = document.getElementById('chatEmail').value;
+            const message = document.getElementById('chatMessage').value;
+
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            try {
+                const response = await fetch(API_BASE + '/chat', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({
+                        userName: name,
+                        userEmail: email,
+                        message: message
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    document.getElementById('chatSuccess').textContent = 
+                        `🤖 Nature Guide: ${data.response}`;
+                    document.getElementById('chatSuccess').style.display = 'block';
+                    document.getElementById('chatMessage').value = '';
+                    
+                    setTimeout(() => {
+                        closeModal('chatModal');
+                        document.getElementById('chatSuccess').style.display = 'none';
+                    }, 4000);
+                }
+            } catch (error) {
+                alert('💬 Chat simulation: Thanks for your message! Our team will contact you soon.');
+                closeModal('chatModal');
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
